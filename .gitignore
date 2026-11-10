@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+raw/
+runs/
+private/
+# Locally rebuilt dataset text is excluded from this scores-only export.
+items/*.jsonl

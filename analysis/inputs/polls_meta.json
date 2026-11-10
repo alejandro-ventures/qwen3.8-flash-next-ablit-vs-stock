@@ -1,0 +1,15 @@
+{
+ "a1_speed_flagged_polls": [
+  {
+   "minute_in_speed_step": 5.0,
+   "running": 5,
+   "waiting": 4,
+   "harness_inflight": 0
+  }
+ ],
+ "a1_speed_timeline_min": {
+  "bench_py_ended": 2.2,
+  "full_bench_streams_ended": 17.8
+ },
+ "telemetry_missing_harness_inflight_polls": {}
+}

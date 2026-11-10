@@ -1,0 +1,5 @@
+IFEval checker
+Copyright 2023 The Google Research Authors.
+Vendored through lm-evaluation-harness 0.4.13; Apache License 2.0.
+Import paths were made local in the study. Original copyright and licence headers are retained in source files.
+This attribution notice is supplied by the study export; it is not asserted to be an upstream NOTICE file.
