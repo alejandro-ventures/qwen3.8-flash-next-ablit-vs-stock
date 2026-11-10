@@ -38,7 +38,7 @@ H1's entire interval is below the -1.5 pp margin: the data support a loss larger
 | prompt_reuse | pass | pass | pass | pass | pass | pass |
 | context_boundary | pass | pass | pass | pass | pass | pass |
 | visioncheck | pass | pass | pass | pass | pass | pass |
-Second-attempt files present: none
+Layer 1 second-attempt files present: none
 
 Every engine check passed in all primary sessions and C1. These checks compare a build with itself; they do not establish A/B byte identity or general correctness. The A0 diagnostic statuses are in [layer1.csv](analysis/inputs/layer1.csv). [Long-context task-by-length cells and the 4K control](analysis/extra_tables.md) are reported separately; H1b pools 32K+128K with equal task weights and task-by-length strata.
 
@@ -55,9 +55,9 @@ The original JSON-copy, assistant-style and 200 Layer 2 prompt texts are withhel
 | B2 | 20e15e4, published image | ABLIT=1 | 47/50 | 0/20 |
 | C1 | 20e15e4, published image | exploratory second sidecar | 42/50 | 0/20 |
 
-H4 compares unique failed thinking-off tasks: A 0/50, B 3/50, C 8/50. The operational gate fails for B; exact McNemar p=0.25 is not a significant paired difference. The one-sided 95% upper bound is calculated with n=50. Historical thinking-on failures occurred in every session, including stock, and are a separate serving-stack observation. The [fresh synthetic checks](findings/thinking_json_schema.md), covering streamed/non-streamed, strict/non-strict and json_object conditions, did not reproduce malformed JSON. Schema-constrained thinking-on responses parsed and met the schema but failed exact amount equality. The historical failure mechanism remains unresolved; the malformed-JSON bug claim is held for investigation. No raw replies or examples are published under the scores-only decision.
+H4 compares unique failed thinking-off tasks: A 0/50, B 3/50, C 8/50. The operational gate fails for B; exact McNemar p=0.25 is not a significant paired difference. The one-sided 95% upper bound is calculated with n=50. Historical thinking-on failures occurred in every session, including stock, and are a separate serving-stack observation. The [fresh synthetic checks](findings/thinking_json_schema.md), covering streamed/non-streamed, strict/non-strict and json_object conditions, did not reproduce malformed JSON. Schema-constrained thinking-on responses parsed and met the schema but failed exact amount equality. A count-only audit of the historical thinking-on responses found all 120/120 parseable and schema-valid, with correct record_id but incorrect amount and finish_reason=stop. The observed historical failure is value copying; its root cause remains unestablished. The malformed-JSON allegation is withdrawn. No raw replies or examples are published under the scores-only decision.
 
-Layer 2 hashes are identical for 200/200 A1/A2 and 200/200 B1/B2 prompts; all 200 differ across A/B. First differing word is the fallback because token IDs were not stored. Token-length ratios are 1.000, but the recorded cap statistics are 160/200 for A1/A2, 154/200 for B1/B2 and 156/200 for C1. The source prose's statement that every reply reached the cap is inconsistent with those counts; retain the counts and treat the length-ratio interpretation cautiously. Observed repeatability on these prompts is not proof that restart uncertainty is negligible.
+Layer 2 hashes are identical for 200/200 A1/A2 and 200/200 B1/B2 prompts; all 200 differ across A/B. First differing word is the fallback because token IDs were not stored. The reported median and IQR of token-length ratios are 1.000 (individual A/B ratios span about 0.199-2.188), but the recorded cap statistics are 160/200 for A1/A2, 154/200 for B1/B2 and 156/200 for C1. Only 148/200 A/B pairs are capped on both sides. The earlier universal-cap explanation was incorrect; median and IQR do not imply every ratio equals one. Observed repeatability on these prompts is not proof that restart uncertainty is negligible.
 
 ## Refusal and classifier validity
 
@@ -65,6 +65,8 @@ The judge is itself abliterated. Published labels support **re-analysis, not re-
 
 ### Refusal and over-refusal under several classifiers (H5; frozen judge prompt hash 6f3a6852c5a9)
 Contrast-specific complete cases; per-prompt arm value = mean over the arm's sessions; paired cluster bootstrap over prompts. Read the judge rows together with the validation audit below (kappa 0.34): the direction is robust, the magnitudes are classifier-dependent and should not be quoted as precise.
+
+COMPLIED is a classifier label, not verified useful task completion; the historical truncation handling differs from the protocol (D15).
 
 | set | classifier | A % | B % | C % | B-A (pp) [95% CI] | C-A (pp) [95% CI] |
 |---|---|---|---|---|---|---|
@@ -180,7 +182,7 @@ Direction: **B is slower than A on prose and faster than A on code** in these is
 | code_1 | 1.443 [1.435, 1.448] | NO | [1.441, 1.447] | 1.445 [1.435, 1.449] | 1.440, 1.443, 1.446, 1.449 | 1.179 |
 | code_5 | 1.387 [1.372, 1.392] | NO | [1.372, 1.389] | 1.387 [1.373, 1.392] | 1.385, 1.386, 1.391, 1.392 | 1.120 |
 
-The D2 statement that this interval mostly shows session-to-session spread is **not supported**: the six values per arm are three batch medians within each of two sessions, so the interval reflects within-session repetition; two sessions per arm cannot characterise restart variability. The pooling of dependent observations is a limitation of the pre-registered construction. The clean-only column drops A1's first decode median (taken during the full benchmark run in which the A1 speed-step contaminated poll occurred, see D8 section) and is the protocol-compliant check for the zero-contamination speed rule.
+The D2 statement that this interval mostly shows session-to-session spread is **not supported**: the six values per arm are three batch medians within each of two sessions, so the interval reflects within-session repetition; two sessions per arm cannot characterise restart variability. The pooling of dependent observations is a limitation of the pre-registered construction. The clean-only column drops A1's first decode median (taken during the full benchmark run in which the A1 speed-step contaminated poll occurred, see D8 section) and is a sensitivity under the applied speed-step rule, not a demonstrated implementation of the original zero-contamination rule.
 
 ### Prefill tok/s from the full run (one run per session, exploratory; cached-token count in brackets)
 | ~prompt tokens | A1 | A2 | B1 | B2 | C1 |
@@ -224,6 +226,12 @@ One C1 session ran after A2 with sidecar revision `f0192705c8ab34f1140f7be8dbe55
 
 C's BFCL change is -9.67 pp; thinking-off JSON failures are 8/50. No claim about ABLIT=2 is supported.
 
+### Refusal truncation correction (D15)
+
+The historical judge only left length-truncated replies unclassified when stripped content was shorter than 20 characters; PROTOCOL required all truncated replies to be unclassified. Historical labels remain unchanged. The [separate count-only sensitivity](analysis/refusal_truncation_sensitivity.md) shows primary A/B thinking-off sets stay below 5% unclassified, with B1/B2 harmful each 13/291 (4.47%). C1 harmful (21/291, 7.22%) and A1/A2/C1 thinking-on benign (8/100, 8%) exceed 5% and are inconclusive exploratory sets under that rule. This audit does not redo judging or recompute paired effects.
+
+Validation sampling correction (D12): the planned 30 judge/regex agreements plus 30 disagreements was not followed; the 60 selected pairs contain 47 agreements and 13 disagreements, balanced as 15 harmful plus 15 benign per arm. Kappa remains descriptive of that sample, not a population calibration.
+
 ## Deviations and when they occurred
 
 | deviation | timing relative to data | change or limitation |
@@ -241,6 +249,8 @@ C's BFCL change is -9.67 pp; thinking-off JSON failures are 8/50. No claim about
 | D11 | after collection | deterministic language-detector seeding; headline re-scoring; hardware-sensitive mbpp-239 and scoring-environment sensitivity |
 | D12 | after collection | judge validation on 60 truncated responses, below intended agreement; no rubric revision |
 | D13 | after data and reviewer gate | corrected strata, complete-case coverage, MGSM clustered analysis, speed eligibility, D8 sensitivities and uncertainty wording |
+| D14 | import change before B; documented after collection | installed-to-vendored IFEval import after protocol freeze; all five comparison sessions later re-scored together |
+| D15 | implementation during collection; discovered in final review | truncated refusal replies were not all unclassified; strict-rule count sensitivity supplied |
 
 [DEVIATIONS.md](DEVIATIONS.md) retains superseded D2, D9 and D10 statements with visible corrections. D8 used last stored attempt results, including after restarts; A1's original-rule exceedances were not enforced prospectively. Poll telemetry has blind spots and cannot prove foreign traffic absent. [Full session × step × attempt table](analysis/inputs/polls.csv) retains original-rule, changed-rule and step-specific counts with relative minutes.
 
@@ -248,11 +258,11 @@ D8 sensitivity, primary sessions only: drop BFCL, retain MMLU-Pro/MATH-500/code/
 
 D11: deterministic langdetect seed 0 is the headline. Unseeded and alternate-environment per-item scores are published. mbpp-239 took about 26 seconds on one CPU against a 30-second limit and timed out in the alternate environment. Its contribution if B/C score zero is -0.28 pp on code and about -0.05 pp on the composite. The two-second caution rule was itself post-data. No claim that this export recreates the old CPU environment is made.
 
-**Unresolved provenance exception:** items/MANIFEST.json records harness/tasks.py SHA-256 `eed2062f571ebd9a876bf535e97fb9fd734efc7150738e96a22b958e42d09331`; the staged file hashes to `adde014f` (prefix). This discrepancy predates the export and is not resolved without the private history. The freeze-time hash is retained rather than silently replaced. The item builder checks dataset hashes but reports this scoring-module mismatch separately; it cannot certify the full scoring-code freeze. The D10/D11 statement that scoring code was unchanged must be read with this exception pending owner review.
+**Scoring provenance correction (D14):** the freeze-time tasks.py hash is retained. The private-history diff shows a single pre-B import-path change from installed to vendored IFEval checker code (2cb7733 to bb7ebb0), after A1 collection had begun. All five comparison sessions were re-scored together under D11. The changed hash therefore has an explained provenance; it remains a deviation from the original freeze, not proof of byte identity with protocol-v1. See D14 for both full hashes and the timing. No score was changed for this correction.
 
 ## Analysis specification
 
-* Complete cases are selected separately for each contrast; C1 does not constrain A/B membership. Coverage is 100%; above 2% missing the relevant gate is inconclusive. Scores are asserted binary and finite.
+* Complete cases are selected separately for each contrast; C1 does not constrain A/B membership. Coverage is 100% of records; this does not mean every refusal reply was classified (historical UNCLASSIFIED labels remain zero in binary primary contrasts). Displayed percentages are rounded; deltas use full-precision scores. above 2% missing the relevant gate is inconclusive. Scores are asserted binary and finite.
 * Compute each item's mean over sessions within arm (0, 0.5 or 1 for two sessions), then B minus A. Composite weights are 1/6 for MMLU-Pro, MATH-500, code (HumanEval+ and MBPP+ pooled), IFEval, MGSM (three languages pooled), and BFCL (three categories pooled). Long context is separate.
 * Paired percentile cluster bootstrap: 10,000 resamples, seed 1. MMLU-Pro resamples within category; MGSM clusters translations by problem index; other capability benchmarks resample items. Long context uses task × length strata and equal task weights; 4K is a matched control, 32K+128K the H1b endpoint. Sessions are averaged, not resampled as independent observations. Frozen compare.py's unstratified MMLU-Pro and task-only long-context treatment is a labelled sensitivity.
 * H1 margin -1.5 pp (secondary -1.0 pp line retained in the frozen comparison); long-context H1b -5 pp; speed equivalence [0.95,1.05] with 90% intervals; benign over-refusal upper 95% bound below +3 pp. A one-sided 97.5% lower bound is the lower end of the two-sided 95% interval. H4 is an operational unique-failure gate, with an exact n=50 binomial upper bound. Capability per-set -3 pp is descriptive, except the tool-calling secondary gate, whose lower bound must exceed -3 pp.
@@ -275,7 +285,7 @@ python3 -m venv .venv
 .venv/bin/python -B analysis/run_all.py
 ```
 
-This writes main, unseeded and alternate-environment corrected-v2 tables, the frozen comparison, classifier tables, label-only validation summary, and [OUTPUT_HASHES.json](analysis/OUTPUT_HASHES.json) with SHA-256 hashes. It does not fetch data or call a server. Analysis runtime depends on CPU; allow several minutes. See the reproduction record for a measured check. The original collection took about 7–8 hours per session on one GB10 (capability about 3.5 hours, long context about one hour, refusal about 0.7 hours, engine checks and speed about 0.5 hours); original re-scoring plus analysis about 10 minutes on a PC. These are rough workload estimates, not guarantees.
+This writes main, unseeded and alternate-environment corrected-v2 tables, the frozen comparison, classifier tables, label-only validation summary, and [OUTPUT_HASHES.json](analysis/OUTPUT_HASHES.json) with SHA-256 hashes. It does not fetch data or call a server. Analysis runtime depends on CPU; allow several minutes. See the [completed reproduction record](docs/REPRODUCTION.md) for commands, environment, limitations and all output hashes. The original collection took about 7–8 hours per session on one GB10 (capability about 3.5 hours, long context about one hour, refusal about 0.7 hours, engine checks and speed about 0.5 hours); original re-scoring plus analysis about 10 minutes on a PC. These are rough workload estimates, not guarantees.
 
 Optional dataset reconstruction (writes dataset text locally; do not add generated JSONL files to the export):
 
@@ -307,12 +317,16 @@ Dataset licence declarations were fetched at the pinned revisions on 2026-11-10.
 | evalplus/mbppplus | license: apache-2.0 | [pinned source](https://huggingface.co/datasets/evalplus/mbppplus/raw/b2d74c91837c3f2a20c1299ae98133cbe7cfa077/README.md) |
 | gorilla-llm/Berkeley-Function-Calling-Leaderboard | license: apache-2.0 | [pinned source](https://huggingface.co/datasets/gorilla-llm/Berkeley-Function-Calling-Leaderboard/raw/61fc0608cfd831fcfbbaa676ebdfef0ed963eeda/README.md) |
 | JailbreakBench/JBB-Behaviors | license: "mit" | [pinned source](https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors/raw/886acc352a31533ffbcf4ef22c744658688086fc/README.md) |
-| centerforaisafety/HarmBench | MIT License /  | [pinned source](https://raw.githubusercontent.com/centerforaisafety/HarmBench/8e1604d1171fe8a48d8febecd22f600e462bdcdd/LICENSE) |
-| paul-rottger/xstest | Attribution 4.0 International /  | [pinned source](https://raw.githubusercontent.com/paul-rottger/xstest/d7bb5bd738c1fcbc36edd83d5e7d1b71a3e2d84d/LICENSE) |
+| centerforaisafety/HarmBench | MIT License | [pinned source](https://raw.githubusercontent.com/centerforaisafety/HarmBench/8e1604d1171fe8a48d8febecd22f600e462bdcdd/LICENSE) |
+| paul-rottger/xstest | Attribution 4.0 International | [pinned source](https://raw.githubusercontent.com/paul-rottger/xstest/d7bb5bd738c1fcbc36edd83d5e7d1b71a3e2d84d/LICENSE) |
 
-MATH-500: the pinned card was fetched but does not declare a licence; underlying MATH/source terms remain unverified here. No dataset-text redistribution is licensed by this export.
+MATH-500: the pinned card has no licence declaration but links the PRM800K math splits. Source-chain checks on 2026-11-10 found MIT at [PRM800K's pinned licence](https://github.com/openai/prm800k/blob/7ecc794703b2877f63226f2477a49b34f9b25163/LICENSE) and [the underlying MATH repository licence](https://github.com/hendrycks/math/blob/985bdc1696e88e8643f081a0ff4719da39f2ae2a/LICENSE). These checks document available source terms, not a full third-party chain-of-title determination. This export contains IDs and scores, not dataset text; its original-work licence does not relicense upstream material.
 MGSM attribution: the Multilingual Grade School Math Benchmark authors, through the pinned juletxara/mgsm dataset card; selected English, German and Spanish test items, converted to ID/score records. The original text is withheld. Apply CC BY-SA 4.0 to MGSM-derived portions where required.
 The local long-context generator is original study code (MIT); the synthetic stand-ins are CC BY 4.0. The public refusal ID lists derive from JBB-Behaviors, HarmBench and XSTest as listed above.
 
 
 Harness, analysis and write-up were done with AI assistance (Claude Code; the local judge/drafting model; a second AI model as reviewer). The reviewer examined this work; it did not independently replicate the study. Every reported number traces to published per-item scores or the documented numeric/label inputs. Corrections should be recorded visibly in an erratum, not silently substituted into a released report.
+
+No model weights, sidecars, direction files or access credentials are distributed. Official sources checked on 2026-11-10: the base model uses [Qwen Community License 1.0 at the checked revision](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/812d96e10a0dd82b69d749e68693698cf6c36daa/LICENSE), not MIT or Apache-2.0. The [pinned NVIDIA checkpoint card](https://huggingface.co/nvidia/Qwen3.8-Flash-Next-FP4-Local/blob/b9ce18a6887e18c089fdea8509a33e63429a3300/README.md) identifies both the NVIDIA Open Model Agreement and Qwen terms; the agreement linked there was read (version 2026-03-09). Upstream use and redistribution conditions remain applicable where relevant; the report's licence does not grant rights to those models. Verifying these sources is distinct from scientific validation or a blanket legal clearance.
+
+Reproduced main table SHA-256 (`analysis/extra_tables.md`): `b7a32755343b9f0ec061c02f989dee55b3c398b3910aa98f4df0d1f7605761de`. The fresh-environment run reproduced all ten generated output hashes; see [the reproduction record](docs/REPRODUCTION.md).

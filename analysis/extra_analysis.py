@@ -192,6 +192,8 @@ def refusal_contrast(X, Y, setname, field, labels):
     return {"n": len(common), "X": float(xa.mean()), "Y": float(ya.mean()), "d": float(d.mean()), "ci95": [float(np.percentile(bd, 2.5)), float(np.percentile(bd, 97.5))]}
 OUT["refusal"] = {}
 md("### Refusal and over-refusal under several classifiers (H5; frozen judge prompt hash " + LAB["A2"]["prompt_hash"][:12] + ")")
+md("COMPLIED is a judge label, not verified useful task completion. Frozen labels use the historical truncation implementation; see DEVIATIONS D15 and refusal_truncation_sensitivity.md. Kappas describe a post-hoc 47/13 agreement/disagreement validation sample (D12), not population accuracy.")
+md()
 md("Contrast-specific complete cases; per-prompt arm value = mean over the arm's sessions; paired cluster bootstrap over prompts. Read the judge rows together with the validation audit below (kappa 0.34): the direction is robust, the magnitudes are classifier-dependent and should not be quoted as precise.")
 md(); md("| set | classifier | A % | B % | C % | B-A (pp) [95% CI] | C-A (pp) [95% CI] |"); md("|---|---|---|---|---|---|---|")
 for setname in ("refusal_harmful", "refusal_benign", "refusal_harmful_t", "refusal_benign_t"):
@@ -229,7 +231,7 @@ def first_word_diff(a, b):
 FWD = {(r["session_x"], r["session_y"], r["prompt_id"]): int(r["first_differing_word_index"]) for r in read_csv("layer2_first_diff.csv")}
 OUT["layer2"] = {}
 md("### Layer 2 greedy-output divergence (exploratory): 200 prompts, 512-token cap")
-md("Word index of the first difference is the fallback named in PROTOCOL 5 (token ids are not stored). Length ratio = completion tokens Y / X; it is exactly 1.000 because every reply ran to the 512-token cap (see below), so this column carries no information.")
+md("Word index of the first difference is the fallback named in PROTOCOL 5 (token ids are not stored). Length ratio = completion tokens Y / X; the reported median and IQR are exactly 1.000, not every individual ratio. A/B ratios range about 0.199-2.188 and 148/200 A/B pairs are capped on both sides. Correction (2026-11-10): cap counts are 160/200 for A1/A2, 154/200 for B1/B2 and 156/200 for C1, so the earlier claim that every reply reached 512 tokens was wrong. Equal lengths do not imply universal cap saturation; interpret this column cautiously.")
 md(); md("| contrast | identical token hash | non-identical | first differing word, median [IQR] |"); md("|---|---|---|---|")
 for x, y in [("A1", "A2"), ("B1", "B2"), ("A1", "B1"), ("A1", "B2"), ("A2", "B1"), ("A2", "B2"), ("A1", "C1"), ("B1", "C1")]:
     X, Y = S[x]["layer2"], S[y]["layer2"]; ids = sorted(set(X) & set(Y)); ident = [i for i in ids if X[i]["sha"] == Y[i]["sha"]]; non = [i for i in ids if i not in set(ident)]
@@ -288,7 +290,7 @@ for cond in ("prose_1", "prose_5", "code_1", "code_5"):
     rc = pooled_ratio(A_all, C_all); eq = cb[0] >= 0.95 and cb[1] <= 1.05
     OUT["H3"][cond] = {"B_over_A": rb, "ci90_D2": cb, "ci90_within_session": cw, "B_over_A_clean_A": rcl, "ci90_clean": ccl, "session_ratios": sess, "equivalent": eq, "C_over_A": rc}
     md(f"| {cond} | {rb:.3f} [{cb[0]:.3f}, {cb[1]:.3f}] | {'yes' if eq else 'NO'} | [{cw[0]:.3f}, {cw[1]:.3f}] | {rcl:.3f} [{ccl[0]:.3f}, {ccl[1]:.3f}] | " + ", ".join(f"{v:.3f}" for v in sess) + f" | {rc:.3f} |")
-md(); md("The D2 statement that this interval mostly shows session-to-session spread is **not supported**: the six values per arm are three batch medians within each of two sessions, so the interval reflects within-session repetition; two sessions per arm cannot characterise restart variability. The pooling of dependent observations is a limitation of the pre-registered construction. The clean-only column drops A1's first decode median (taken during the full benchmark run in which the A1 speed-step contaminated poll occurred, see D8 section) and is the protocol-compliant check for the zero-contamination speed rule.")
+md(); md("The D2 statement that this interval mostly shows session-to-session spread is **not supported**: the six values per arm are three batch medians within each of two sessions, so the interval reflects within-session repetition; two sessions per arm cannot characterise restart variability. The pooling of dependent observations is a limitation of the pre-registered construction. The clean-only column drops A1's first decode median (taken during the full benchmark run in which the A1 speed-step contaminated poll occurred, see D8 section) and is a sensitivity under the applied speed-step rule, not a demonstrated implementation of the original zero-contamination rule.")
 md()
 pf = {l: [(f"{int(r['prompt_tokens']):,}", int(r["tok_s"]), int(r["cached_tokens"])) for r in sorted((r for r in read_csv("prefill.csv") if r["session"] == l), key=lambda r: int(r["row"]))] for l in SESS}; OUT["prefill"] = pf
 md("### Prefill tok/s from the full run (one run per session, exploratory; cached-token count in brackets)"); md("| ~prompt tokens | " + " | ".join(SESS) + " |"); md("|---|" + "---|" * len(SESS))

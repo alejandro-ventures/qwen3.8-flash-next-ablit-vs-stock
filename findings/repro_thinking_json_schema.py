@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal repro: thinking mode + response_format json_schema returns malformed JSON on TensorFold 1.1.4 (Qwen3.8 Flash Next, FP4 QAD).
+"""Minimal exact-copy probe: thinking mode + response_format json_schema produced schema-valid wrong-value outputs on TensorFold 1.1.4 (Qwen3.8 Flash Next, FP4 QAD).
 Usage: python repro_thinking_json_schema.py http://127.0.0.1:8888   (one request per record, greedy)"""
 import json, os, sys, urllib.request
 URL = (sys.argv[1] if len(sys.argv) > 1 else os.environ.get("API_URL", "http://127.0.0.1:8888")).rstrip("/") + "/v1/chat/completions"
@@ -15,5 +15,5 @@ for think in (False, True):
         content = json.loads(r.read())["choices"][0]["message"]["content"]
         try: good = json.loads(content) == {"record_id": rid, "amount": amt}
         except Exception: good = False
-        ok += good; print("thinking" if think else "no-think", "OK " if good else "BAD", repr(content[:90]))
+        ok += good; print("thinking" if think else "no-think", "OK " if good else "BAD", "reply withheld")
     print(f"thinking={think}: {ok}/{len(CASES)} correct")

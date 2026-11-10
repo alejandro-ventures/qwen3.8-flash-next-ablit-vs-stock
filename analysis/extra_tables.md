@@ -130,6 +130,8 @@ Complete coverage (50 of 50 in every session): True. Unique failed tasks: A 0, B
 - C1: N profile 42/50, T profile 0/20
 
 ### Refusal and over-refusal under several classifiers (H5; frozen judge prompt hash 6f3a6852c5a9)
+COMPLIED is a judge label, not verified useful task completion. Frozen labels use the historical truncation implementation; see DEVIATIONS D15 and refusal_truncation_sensitivity.md. Kappas describe a post-hoc 47/13 agreement/disagreement validation sample (D12), not population accuracy.
+
 Contrast-specific complete cases; per-prompt arm value = mean over the arm's sessions; paired cluster bootstrap over prompts. Read the judge rows together with the validation audit below (kappa 0.34): the direction is robust, the magnitudes are classifier-dependent and should not be quoted as precise.
 
 | set | classifier | A % | B % | C % | B-A (pp) [95% CI] | C-A (pp) [95% CI] |
@@ -212,7 +214,7 @@ Contrast-specific complete cases; per-prompt arm value = mean over the arm's ses
 | C1 | refusal_benign_t | 0 | 0 | 98 | 0 | 2 |
 
 ### Layer 2 greedy-output divergence (exploratory): 200 prompts, 512-token cap
-Word index of the first difference is the fallback named in PROTOCOL 5 (token ids are not stored). Length ratio = completion tokens Y / X; it is exactly 1.000 because every reply ran to the 512-token cap (see below), so this column carries no information.
+Word index of the first difference is the fallback named in PROTOCOL 5 (token ids are not stored). Length ratio = completion tokens Y / X; the reported median and IQR are exactly 1.000, not every individual ratio. A/B ratios range about 0.199-2.188 and 148/200 A/B pairs are capped on both sides. Correction (2026-11-10): cap counts are 160/200 for A1/A2, 154/200 for B1/B2 and 156/200 for C1, so the earlier claim that every reply reached 512 tokens was wrong. Equal lengths do not imply universal cap saturation; interpret this column cautiously.
 
 | contrast | identical token hash | non-identical | first differing word, median [IQR] |
 |---|---|---|---|
@@ -255,7 +257,7 @@ Direction: **B is slower than A on prose and faster than A on code** in these is
 | code_1 | 1.443 [1.435, 1.448] | NO | [1.441, 1.447] | 1.445 [1.435, 1.449] | 1.440, 1.443, 1.446, 1.449 | 1.179 |
 | code_5 | 1.387 [1.372, 1.392] | NO | [1.372, 1.389] | 1.387 [1.373, 1.392] | 1.385, 1.386, 1.391, 1.392 | 1.120 |
 
-The D2 statement that this interval mostly shows session-to-session spread is **not supported**: the six values per arm are three batch medians within each of two sessions, so the interval reflects within-session repetition; two sessions per arm cannot characterise restart variability. The pooling of dependent observations is a limitation of the pre-registered construction. The clean-only column drops A1's first decode median (taken during the full benchmark run in which the A1 speed-step contaminated poll occurred, see D8 section) and is the protocol-compliant check for the zero-contamination speed rule.
+The D2 statement that this interval mostly shows session-to-session spread is **not supported**: the six values per arm are three batch medians within each of two sessions, so the interval reflects within-session repetition; two sessions per arm cannot characterise restart variability. The pooling of dependent observations is a limitation of the pre-registered construction. The clean-only column drops A1's first decode median (taken during the full benchmark run in which the A1 speed-step contaminated poll occurred, see D8 section) and is a sensitivity under the applied speed-step rule, not a demonstrated implementation of the original zero-contamination rule.
 
 ### Prefill tok/s from the full run (one run per session, exploratory; cached-token count in brackets)
 | ~prompt tokens | A1 | A2 | B1 | B2 | C1 |

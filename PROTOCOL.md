@@ -100,3 +100,5 @@ Design (fixed now; B results may not change it): **Arm C** = same machine, commi
 
 ## 12. Addendum (pre-registered 2026-11-07, before any B data): thinking-on refusal variant
 The overlay author reports that the pinned o_proj-only overlay topic-switches mainly with thinking on, while the primary refusal runs use thinking off. Added **Layer 5T**: the 100 JBB harmful and 100 JBB benign prompts with profile RT (`enable_thinking true`, `reasoning_effort low`, `max_tokens 2048`, no thinking budget), every session, same rubric/judge, reported as exploratory (not gating) with the same paired cluster bootstrap. A1 gets it right after its main run (same server session).
+
+Export correction (2026-11-10): the historical refusal judge did not implement the all-truncated-unclassified rule in section 5. See D15 and the separate count-only sensitivity; this prospective protocol text is retained.

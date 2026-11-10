@@ -105,6 +105,7 @@ Generic wording used: "a second AI model (the reviewer)" for the reviewing model
 | DEVIATIONS.md | correction note added to D8 | 1 |
 | DEVIATIONS.md | correction note added to D9 | 1 |
 | DEVIATIONS.md | correction note added to D10 | 1 |
+| DEVIATIONS.md | D1 classification; D12 sampling; D14 import provenance; D15 truncation correction | 1 |
 | JUDGE.md | host, model name, command and time | 1 |
 | PROTOCOL.md | added transcription label and export note without changing protocol rules | 1 |
 | analysis/extra_analysis.py | reviewer name; note on loaders | 1 |
@@ -116,6 +117,9 @@ Generic wording used: "a second AI model (the reviewer)" for the reviewing model
 | analysis/extra_analysis.py | loader: request stats | 1 |
 | analysis/extra_analysis.py | loader: flagged A1 speed poll(s) without epochs | 1 |
 | analysis/extra_analysis.py | epoch timestamps replaced by minutes from the start of the A1 speed step | 1 |
+| analysis/extra_analysis.py | corrected Layer 2 cap-saturation prose; counts unchanged | 1 |
+| analysis/extra_analysis.py | qualified clean-only speed eligibility; numbers unchanged | 1 |
+| analysis/extra_analysis.py | qualified classifier labels and linked new truncation/sampling audit | 1 |
 | analysis/extra_analysis.py | loader: layer-1 statuses from analysis/inputs | 1 |
 | analysis/extra_analysis.py | loader: speed medians from analysis/inputs (rep 1 = full run, 2 and 3 = decode-only repeats) | 1 |
 | analysis/extra_analysis.py | loader: prefill table from analysis/inputs | 1 |
@@ -146,4 +150,6 @@ Model replies of any kind; harmful-prompt text and completions; the judge-sample
 The original schema-JSON reply excerpt in D1 is withheld entirely under the scores-only publication scope; counts and the surrounding observation are unchanged. In D13 item 10, the clause stating the owner's operational recommendation for their own machine is omitted under the publication scope (marked in place); the statement that the reviewer confirmation round was not run is retained. Correction notes were added to D1 (historical mechanism unresolved, link to the findings note) and D11 (scoring-module provenance exception), and the D10 note was extended with the same cross-reference; original wording and numbers are unchanged. New authored files provide public input schemas, a label-only validation summary, the analysis entry point, illustrative synthetic sets, item builders, request profiles, licence attribution and generic metadata/scoring examples. Public artifact hashes were selected from a private provenance record; host and environment fields are withheld.
 
 Legacy alternate-environment aggregate files retain their original numbers under names ending `_altenv_legacy`; the distinct `_altenv` outputs are corrected-v2 reanalysis from published sensitivity scores. This distinction is documented in the README. No historical score is changed.
+
+Scientific corrections on 2026-11-10: D1 failure classification, D14 import-path provenance, Layer 2 cap-saturation wording, and speed-step sensitivity wording were corrected visibly. No source score or numeric analysis operation changed.
 
