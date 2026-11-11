@@ -1,0 +1,70 @@
+{
+  "source_inputs": {
+    "analysis/extra_results.json": "1376cbf94c8a9d7412c5192fb24f189c91b753634630c391097611e5d40ddcdf",
+    "analysis/inputs/adjudication_pairs.csv": "a6ab607121ef9b88e6f8069f91f29d60c542c128c0adb7bbecf6b7a7b7092d7d"
+  },
+  "generator_sha256": "261810f6a9bd33c2d772db840babb3279771f7c2772d157e25eba44c084bcf72",
+  "outputs": {
+    "01_comparison.png": {
+      "sha256": "feab4b84e78083c4738cee6b36c561f25845f921804eaf52ed5310d28cbbc940",
+      "bytes": 85958
+    },
+    "01_comparison.svg": {
+      "sha256": "706f7f2eb3127a6b96dad1e4f0d3bfa087bb48dc2d5b7798f6a17d83c08dffe2",
+      "bytes": 6877
+    },
+    "02_collection_order.png": {
+      "sha256": "cceaa4cb51c3cae732034f8049ada9818151c40d6dcf1a436d48994d42deb2ac",
+      "bytes": 47260
+    },
+    "02_collection_order.svg": {
+      "sha256": "077fd1113d60b02a9f22fe97478ae3aed5978a3f9bfa473c152acdad5c82eb5e",
+      "bytes": 6417
+    },
+    "03_capability.png": {
+      "sha256": "0843dc2dcbbabec3b1ad6e69c7fc6a9bdb1f97a515016d30f3656ef24a0e9b72",
+      "bytes": 114963
+    },
+    "03_capability.svg": {
+      "sha256": "42d08581bec7a53bee9c04642c56f95103792000b915ebd4929a7a2e059c6af8",
+      "bytes": 17749
+    },
+    "04_refusal.png": {
+      "sha256": "d6f903e315b91fb98c2af14cae03aecccbef12dd452bd7b6ca516e68c59656ec",
+      "bytes": 93884
+    },
+    "04_refusal.svg": {
+      "sha256": "1ca5c959d581ae4fb027874295eff88e5524109ca1a2dbd9074aaadc185d801d",
+      "bytes": 19063
+    },
+    "05_speed.png": {
+      "sha256": "3f8e71e675da29830f58ace28b00b62c8e5e3821209cba938eaf2576f8811b0a",
+      "bytes": 101576
+    },
+    "05_speed.svg": {
+      "sha256": "acda4b8a081b03e641f7391daa7180cda7821274e33cc7dfdc7e027e3316abab",
+      "bytes": 27349
+    },
+    "06_sensitivity.png": {
+      "sha256": "4e81ab68b6fbeb3f06f29e748684ed0135ffcd2724962cabad26211f573c2224",
+      "bytes": 104317
+    },
+    "06_sensitivity.svg": {
+      "sha256": "718005b3e6347403275d8fb391c86df6c5dbfbe1885236b714893b9ae34eabe2",
+      "bytes": 15013
+    },
+    "07_judge_agreement.png": {
+      "sha256": "cabeae7994be1f8dcacdc134445e0222b5e19c4e5c8b03e19430de175f53089f",
+      "bytes": 102428
+    },
+    "07_judge_agreement.svg": {
+      "sha256": "e6d8e2a0290f9a1cbb213ee9fc1be99eae76cff133e18ad99c0c385121ccc52c",
+      "bytes": 11738
+    }
+  },
+  "plot_data_sha256": "eba9ae5646251fa094f9129405d370256598120bb6ea5b08d47116a66ac4fda3",
+  "versions": {
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.9"
+  }
+}

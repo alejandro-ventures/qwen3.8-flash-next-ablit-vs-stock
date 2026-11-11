@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="244.8pt" viewBox="0 0 792 244.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 244.8 
+L 792 244.8 
+L 792 0 
+L 0 0 
+z
+" style="fill: #f4f3ee"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 38.61 140.828544 
+L 189.09 140.828544 
+Q 198.1188 140.828544 198.1188 139.24224 
+L 198.1188 75.79008 
+Q 198.1188 74.203776 189.09 74.203776 
+L 38.61 74.203776 
+Q 29.5812 74.203776 29.5812 75.79008 
+L 29.5812 139.24224 
+Q 29.5812 140.828544 38.61 140.828544 
+z
+" clip-path="url(#p6065a53668)" style="fill: #fbfaf6; stroke: #d9d7ce; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 222.948 140.828544 
+L 373.428 140.828544 
+Q 382.4568 140.828544 382.4568 139.24224 
+L 382.4568 75.79008 
+Q 382.4568 74.203776 373.428 74.203776 
+L 222.948 74.203776 
+Q 213.9192 74.203776 213.9192 75.79008 
+L 213.9192 139.24224 
+Q 213.9192 140.828544 222.948 140.828544 
+z
+" clip-path="url(#p6065a53668)" style="fill: #fbfaf6; stroke: #d9d7ce; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 407.286 140.828544 
+L 557.766 140.828544 
+Q 566.7948 140.828544 566.7948 139.24224 
+L 566.7948 75.79008 
+Q 566.7948 74.203776 557.766 74.203776 
+L 407.286 74.203776 
+Q 398.2572 74.203776 398.2572 75.79008 
+L 398.2572 139.24224 
+Q 398.2572 140.828544 407.286 140.828544 
+z
+" clip-path="url(#p6065a53668)" style="fill: #fbfaf6; stroke: #d9d7ce; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 591.624 140.828544 
+L 742.104 140.828544 
+Q 751.1328 140.828544 751.1328 139.24224 
+L 751.1328 75.79008 
+Q 751.1328 74.203776 742.104 74.203776 
+L 591.624 74.203776 
+Q 582.5952 74.203776 582.5952 75.79008 
+L 582.5952 139.24224 
+Q 582.5952 140.828544 591.624 140.828544 
+z
+" clip-path="url(#p6065a53668)" style="fill: #fbfaf6; stroke: #d9d7ce; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #3b3f45" x="113.85" y="101.033649" transform="rotate(-0 113.85 101.033649)">A1</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #5f646b" x="113.85" y="122.690029" transform="rotate(-0 113.85 122.690029)">Stock</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 198.611644 107.51616 
+Q 206.018357 107.51616 211.971626 107.51616 
+" style="fill: none; stroke: #5f646b; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 207.971626 105.51616 
+L 211.971626 107.51616 
+L 207.971626 109.51616 
+" style="fill: none; stroke: #5f646b; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #8c4a11" x="298.188" y="101.033649" transform="rotate(-0 298.188 101.033649)">B1</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #5f646b" x="298.188" y="122.690029" transform="rotate(-0 298.188 122.690029)">Original overlay</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 382.949644 107.51616 
+Q 390.356357 107.51616 396.309626 107.51616 
+" style="fill: none; stroke: #5f646b; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 392.309626 105.51616 
+L 396.309626 107.51616 
+L 392.309626 109.51616 
+" style="fill: none; stroke: #5f646b; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #8c4a11" x="482.526" y="101.033649" transform="rotate(-0 482.526 101.033649)">B2</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #5f646b" x="482.526" y="122.690029" transform="rotate(-0 482.526 122.690029)">Original overlay</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 567.287644 107.51616 
+Q 574.694357 107.51616 580.647626 107.51616 
+" style="fill: none; stroke: #5f646b; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 576.647626 105.51616 
+L 580.647626 107.51616 
+L 576.647626 109.51616 
+" style="fill: none; stroke: #5f646b; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #3b3f45" x="666.864" y="101.033649" transform="rotate(-0 666.864 101.033649)">A2</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #5f646b" x="666.864" y="122.690029" transform="rotate(-0 666.864 122.690029)">Stock</text>
+   </g>
+  </g>
+  <g id="text_9">
+   <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #15171a" x="27.72" y="15.533813" transform="rotate(-0 27.72 15.533813)">Figure 2. Restarted collection order: A–B–B–A</text>
+  </g>
+  <g id="text_10">
+   <text style="font-size: 8.3px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #5f646b" x="27.72" y="236.953859" transform="rotate(-0 27.72 236.953859)">A0 was an earlier-image diagnostic. C1 followed A2 with a different overlay and is exploratory. ABBA does not eliminate time effects.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p6065a53668">
+   <rect x="19.8" y="44.064" width="752.4" height="132.192"/>
+  </clipPath>
+ </defs>
+</svg>

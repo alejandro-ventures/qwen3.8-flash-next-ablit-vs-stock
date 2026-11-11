@@ -1,0 +1,5 @@
+# Linkability review
+
+Published refusal item IDs deliberately link to public benchmark membership. Per-item labels disclose classifier decisions and the arm/session, never a prompt or reply. The 60 adjudication rows use new J01..J60 aliases; their private mapping to benchmark item IDs is withheld. Sessions and sets remain visible, so a reader can compare label patterns, and some patterns may narrow possible membership. This is not an anonymity guarantee for benchmark membership. Neither label patterns nor membership disclose a private person, organisation or private workload; the sample uses public refusal datasets. No claim that sample replies can be reconstructed from labels is made.
+
+Original own-workload item text, private identifiers, prompt hashes and raw outputs are withheld. Layer 2 retains response token hashes and numeric first-word differences only, as required for the divergence analysis. The synthetic generator does not read private items, and its IDs never map to original score IDs. The final synthetic items use numbered generic roles rather than invented person or organisation names, after collision review; see items/synthetic/SPEC.md.

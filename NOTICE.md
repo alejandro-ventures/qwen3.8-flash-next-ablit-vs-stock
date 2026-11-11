@@ -1,0 +1,15 @@
+# Notices and attribution
+
+Original study code is under MIT (LICENSE). Report text, tables and illustrative synthetic items are under CC BY 4.0 (LICENSE-docs), subject to third-party rights below. These grants do not relicense third-party datasets or weights.
+
+The arm-C diff adapts MiaAI-Lab scripts/ablit_view.py at 20e15e4. Its original MIT copyright and permission notice is retained in armC/LICENSE-MiaAI-Lab. Apply the diff to that pinned upstream file. The staged original was checked byte-for-byte against the pinned upstream file during export and matched (SHA-256 e7657a77e34b317df8b045e6ba7abc698633c9607fc008f2e635509dbb316876).
+
+The vendored IFEval checker carries the Google Research copyright, Apache-2.0 source headers, LICENSE and attribution NOTICE. It was obtained through lm-evaluation-harness 0.4.13. The report credits MiaAI-Lab's recipe and unmodified engine/speed tools. Overlay credit is in PROTOCOL.md and the README through its public repository link.
+
+Dataset sources and pinned-revision terms are in docs/DATASET_LICENSES.md. Dataset text is not distributed. MGSM-derived portions, where covered by its licence, retain CC BY-SA 4.0 terms; our blanket CC BY 4.0 grant does not override share-alike obligations. XSTest-derived IDs and counts retain CC BY 4.0 attribution to the source. MATH-500: the pinned card has no licence declaration but links the PRM800K math splits. Source-chain checks on 2026-11-10 found MIT at [PRM800K's pinned licence](https://github.com/openai/prm800k/blob/7ecc794703b2877f63226f2477a49b34f9b25163/LICENSE) and [the underlying MATH repository licence](https://github.com/hendrycks/math/blob/985bdc1696e88e8643f081a0ff4719da39f2ae2a/LICENSE). These checks document available source terms, not a full third-party chain-of-title determination. This export contains IDs and scores, not dataset text; its original-work licence does not relicense upstream material.
+
+No model weights, sidecars, direction files or access credentials are distributed. Official sources checked on 2026-11-10: the base model uses [Qwen Community License 1.0 at the checked revision](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/812d96e10a0dd82b69d749e68693698cf6c36daa/LICENSE), not MIT or Apache-2.0. The [pinned NVIDIA checkpoint card](https://huggingface.co/nvidia/Qwen3.8-Flash-Next-FP4-Local/blob/b9ce18a6887e18c089fdea8509a33e63429a3300/README.md) identifies both the NVIDIA Open Model Agreement and Qwen terms; the agreement linked there was read (version 2026-03-09). Upstream use and redistribution conditions remain applicable where relevant; the report's licence does not grant rights to those models. Verifying these sources is distinct from scientific validation or a blanket legal clearance.
+
+## Standalone figures
+
+The seven research figures are generated from the published aggregate and label inputs by `figures/generate_figures.py`. PNG and SVG outputs, exact plotted values and a source/output hash manifest are included. The PDF edition, its page images, generator package and standalone font files are distributed separately and are not part of this repository.
