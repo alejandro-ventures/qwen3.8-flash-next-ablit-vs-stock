@@ -12,4 +12,4 @@ No model weights, sidecars, direction files or access credentials are distribute
 
 ## Standalone figures
 
-The seven research figures are generated from the published aggregate and label inputs by `figures/generate_figures.py`. PNG and SVG outputs, exact plotted values and a source/output hash manifest are included. The PDF edition, its page images, generator package and standalone font files are distributed separately and are not part of this repository.
+The seven research figures are generated from the published aggregate and label inputs by `figures/generate_figures.py`. PNG and SVG outputs, exact plotted values and a source/output hash manifest are included. The PDF edition, its page images, generator package and standalone font files are maintained outside this repository and are not publicly released as part of this update.

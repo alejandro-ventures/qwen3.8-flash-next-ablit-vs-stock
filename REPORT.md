@@ -1,5 +1,7 @@
 # Refusal reduction and capability in Qwen3.8 Flash Next
 
+> **v1.0.1 erratum — 12 November 2026:** outcome-reporting, historical-label and documentation clarifications are recorded in [ERRATA.md](ERRATA.md). Original scores, estimates and intervals are unchanged; [v1.0 remains preserved](https://github.com/alejandro-ventures/qwen3.8-flash-next-ablit-vs-stock/tree/v1.0).
+
 A paired evaluation of a pinned overlay on one GB10
 
 Author: [alejandro-ventures](https://github.com/alejandro-ventures) | 11 November 2026 | Study report
@@ -28,7 +30,6 @@ Source: [detailed technical record](docs/TECHNICAL_REPORT.md); [aggregate result
 
 ## 2 Methods
 
-### Design, outcomes and estimation
 
 
 
@@ -45,6 +46,7 @@ A is the quantized, patched stock deployment (ABLIT=0); B adds the pinned overla
 | Refusal labels | Harmful and benign prompts; several classification rules. |
 | Output speed | Generated tokens/s on two fixed prompts at 1 and 5 streams. |
 | Exact copying | JSON parsing, schema validity and exact field values. |
+| Planned auxiliary pairwise judging | Unreported; completion unverified in retained records; excluded from primary gates. |
 
 
 ### 2.3  Paired estimates and intervals
@@ -68,6 +70,10 @@ Source: [detailed technical record](docs/TECHNICAL_REPORT.md); [complete analysi
 ![Figure 2](figures/02_collection_order.png)
 
 [Editable SVG](figures/02_collection_order.svg)
+
+## Planned exploratory auxiliary outcome
+
+The protocol's pairwise auxiliary-task win rate and 20-pair review are unreported. Retained records do not establish completion of those judgments. No auxiliary result enters the primary six-benchmark composite or gates. See [D16](DEVIATIONS.md#d16-recorded-2026-11-12-planned-auxiliary-judging-outcome-unreported).
 
 ## 3 Results
 
@@ -117,18 +123,22 @@ Source: [aggregate results](analysis/extra_results.json): refusal; [detailed tec
 
 A token is a chunk of text, often part of a word. On the isolated prompts, overlay/stock throughput ratios were 0.936 and 0.853 for prose, and 1.443 and 1.387 for code (Figure 5). Each condition uses one fixed prompt. The D8 speed sensitivity drops A1’s first batch median; ratios become 0.936, 0.853, 1.445 and 1.387 in row order. None of the four conditions met the 0.95-1.05 equivalence criterion. Mixed four-stream harness differences were only a few percent.
 
+Figure 5. Throughput ratios (left) and all batch medians (right; three per session, mostly overlapping). Graphite: A; copper: B. Circles: session 1; squares: session 2. B/A >1 means faster. Shading: 0.95–1.05 equivalence band. Dependent-median intervals are defined in §2.3.
+
+
+
+Source: [aggregate results](analysis/extra_results.json): H3, speed_raw.
+
+![Figure 5](figures/05_speed.png)
+
+[Editable SVG](figures/05_speed.svg)
+
 ### 3.4  Exact copying
 
 
 JSON is structured text software can read; a schema specifies expected fields and types. Exact copying also requires correct values. Thinking mode gives an extra reasoning budget. In the fresh stock check, all 24 schema-constrained outputs were valid: 12/12 thinking-off outputs copied exactly, versus 0/12 thinking-on outputs. Only three unique records were repeated across four settings per mode; repeats are not independent.
 
 Historical thinking-on audit: 120/120 schema-valid, wrong amount. Keep these records separate from the fresh outputs. Four json_object controls also parsed; they did not enforce the two-field schema.
-
-Figure 5. Throughput ratios (left) and all batch medians (right; three per session, mostly overlapping). Graphite: A; copper: B. Circles: session 1; squares: session 2. B/A >1 means faster. Shading: 0.95–1.05 equivalence band. Dependent-median intervals are defined in §2.3.
-
-
-
-Source: [aggregate results](analysis/extra_results.json): H3, speed_raw; [exact-copy checks](findings/thinking_json_schema.md).
 
 ### Table 1. Historical exact copies
 
@@ -141,18 +151,11 @@ Source: [aggregate results](analysis/extra_results.json): H3, speed_raw; [exact-
 | A2 | 50 | 0 |
 | C1 | 42 | 0 |
 
-![Figure 5](figures/05_speed.png)
-
-[Editable SVG](figures/05_speed.svg)
+Source: [exact-copy checks](findings/thinking_json_schema.md); [aggregate JSON counts](analysis/extra_results.json): H4.
 
 ### 3.5  Sensitivity and exploratory contrasts
 
 Using original contamination flags in the primary sessions removes BFCL from the capability composite. This retains 2,574 of 2,874 items across five sets, with weights 1/5, and gives −1.77 pp [−2.84, −0.73]. Including flags from C1 also removes MGSM, leaving 1,824 items across four sets, weights 1/4, and −1.72 pp [−2.96, −0.48]. Both intervals cross the −1.5 pp reference. Figure 6 also reports the original-set C contrasts: C minus A is −2.37 pp and C minus B is +0.56 pp. C is one later, different-overlay session.
-
-### 3.6  Additional checks
-
-
-The pooled 32K/128K long-context difference was 0.00 pp (95% CI −2.50 to +2.50), meeting the H1b -5 pp margin criterion without establishing equality. All six engine checks passed; these are self-consistency checks, not proof of A/B identity. On 200 Layer 2 prompts, within-arm output hashes matched 200/200; A/B hashes matched 0/200. Replies at the 512-token cap were 160/200 in A1/A2, 154/200 in B1/B2 and 156/200 in C1. Hash changes and cap counts are not quality scores.
 
 Figure 6. Capability composites and 95% item-sampling intervals. The D8 rows define different sets and weights; both omit BFCL, the largest decline. The dashed line is a formal margin for the primary row only and a reference for D8. C1 uses the original six sets but has no confirmatory gate. See §2.4 and §4.
 
@@ -164,20 +167,29 @@ Source: [aggregate results](analysis/extra_results.json): d8_sensitivity; capabi
 
 [Editable SVG](figures/06_sensitivity.svg)
 
+### 3.6  Additional checks
+
+
+The pooled 32K/128K long-context difference was 0.00 pp (95% CI −2.50 to +2.50), meeting the H1b -5 pp margin criterion without establishing equality. All six engine checks passed; these are self-consistency checks, not proof of A/B identity. On 200 Layer 2 prompts, within-arm output hashes matched 200/200; A/B hashes matched 0/200. Replies at the 512-token cap were 160/200 in A1/A2, 154/200 in B1/B2 and 156/200 in C1. Hash changes and cap counts are not quality scores.
+
 ### 3.7  Measurement checks
 
 A second model reviewed a selected 60-response sample: A1/B1, 15 harmful and 15 benign responses per session. Selection included 47 judge/regex agreements and 13 disagreements. The two models agreed on 34/60 four-class labels (kappa 0.34), 49/60 refused-versus-other labels (0.44), and 44/60 complied-versus-other labels (0.50). Figure 7 shows the full matrix. The original refusal judge was abliterated; the second model reviewed text truncated to 600 characters. Neither provides ground truth, and this sample does not estimate population accuracy.
-
-#### 3.7.1  Length-finished replies (D15)
-
-
-Across the non-thinking refusal sets, all length-finished replies received labels, contrary to protocol. Table 2 audits this implementation; these counts do not re-estimate the refusal effect.
 
 Figure 7. Selected-sample agreement counts. Rows are the frozen study judge; columns are the second model. Agreement is not accuracy. The 47/13 selection strata describe judge/regex agreement, not the 34 agreements shown on the diagonal.
 
 
 
 Source: [adjudication labels](analysis/inputs/adjudication_pairs.csv); [agreement summary](analysis/validation_summary.json); [truncation counts](analysis/inputs/refusal_truncation_counts.json).
+
+![Figure 7](figures/07_judge_agreement.png)
+
+[Editable SVG](figures/07_judge_agreement.svg)
+
+#### 3.7.1  Length-finished replies (D15)
+
+
+Across the non-thinking refusal sets, all length-finished replies received labels, contrary to protocol. Table 2 audits this implementation; these counts do not re-estimate the refusal effect.
 
 ### Table 2. Length-finished non-thinking replies
 
@@ -189,13 +201,8 @@ Source: [adjudication labels](analysis/inputs/adjudication_pairs.csv); [agreemen
 | A2 | 0 | 5 |
 | C1 | 21 | 5 |
 
-![Figure 7](figures/07_judge_agreement.png)
-
-[Editable SVG](figures/07_judge_agreement.svg)
-
 ## 4 Discussion
 
-### Interpretation and limits
 
 
 
@@ -229,7 +236,7 @@ Source: [detailed technical record](docs/TECHNICAL_REPORT.md); [aggregate result
 
 The primary analysis failed the capability-preservation criterion under D8-amended eligibility. B minus A was -2.92 pp (95% CI -4.08 to -1.77), with the whole interval below the pre-specified -1.5 pp margin. Conditional on these sessions and that eligibility rule, this supports a loss beyond the tolerated margin. BFCL had the largest decline (-8.67 pp), concentrated in parallel tool calls (80% to 53%). Under the original traffic rule, BFCL-related gates would remain inconclusive; queue telemetry neither proves nor rules out foreign traffic. Removing BFCL gives -1.77 pp [-2.84, -0.73]: still negative, but not beyond the margin across the full interval. Both analyses point toward lower measured capability; the threshold conclusion depends on the amended rule and full benchmark set.
 
-Fewer refusal labels do not establish verified useful completion. Speed direction differed between two fixed benchmark prompts, without a demonstrated general mechanism. Thinking-on JSON copying also failed in stock despite valid structure, so this is a separate serving-stack finding. Post-data analysis corrections, an interim look, traffic-rule changes and weak judge validation prevent an unqualified confirmatory claim. These results concern one deployment and one pinned overlay, do not establish a general causal effect of abliteration, and do not provide a deployment recommendation.
+Fewer refusal labels do not establish verified useful completion. Speed direction differed between two fixed benchmark prompts, without a demonstrated general mechanism. Thinking-on JSON copying also failed in stock despite valid structure, so this is a separate stock-deployment observation with unestablished cause. Post-data analysis corrections, an interim look, traffic-rule changes and weak judge validation prevent an unqualified confirmatory claim. These results concern one deployment and one pinned overlay, do not establish a general causal effect of abliteration, and do not provide a deployment recommendation.
 
 ### Data, code and disclosure
 
@@ -275,7 +282,7 @@ Harmful non-thinking: 291 JBB/HarmBench prompts after exact-text deduplication; 
 
 
 
-Source: [detailed technical record](docs/TECHNICAL_REPORT.md); [request profiles](docs/REQUEST_PAYLOADS.md); [historical protocol](PROTOCOL.md) (historical); [dataset/package revisions](items/REVISIONS.json).
+Source: [detailed technical record](docs/TECHNICAL_REPORT.md); [request profiles](docs/REQUEST_PAYLOADS.md); [historical protocol](PROTOCOL.md); [dataset/package revisions](items/REVISIONS.json).
 
 ### B  Requests, collection and estimation
 
@@ -355,12 +362,12 @@ Before B: D1 narrows H4; D2 replaces unavailable speed repetitions with batch me
 #### D.2  Analysis corrections after collection
 
 
-D12 supplies the selected, truncated judge audit. D13 corrects strata, MGSM clustering, contrast-specific coverage, speed eligibility, D8 sensitivity and uncertainty language after data and review. These corrections control the headline analysis; they were not all pre-specified. D14 records an installed-to-vendored IFEval import change before B, documented later; all five comparison sessions were re-scored together under D11. The D14 provenance clarification did not alter the exported scores. D15 is the truncation count audit, with no changed labels. See [DEVIATIONS.md](DEVIATIONS.md) for all D1-D15 entries, including historical statements and visible corrections.
+D12 supplies the selected, truncated judge audit. D13 corrects strata, MGSM clustering, contrast-specific coverage, speed eligibility, D8 sensitivity and uncertainty language after data and review. These corrections control the headline analysis; they were not all pre-specified. D14 records an installed-to-vendored IFEval import change before B, documented later; all five comparison sessions were re-scored together under D11. The D14 provenance clarification did not alter the exported scores. D15 is the truncation count audit, with no changed labels. See [DEVIATIONS.md](DEVIATIONS.md) for D1-D15 and the post-publication D16-D17 clarifications, including historical statements and visible corrections.
 
 #### D.3  Re-analysis boundaries
 
 
-This report consumes frozen aggregate and label/count inputs; it does no new bootstrap, judging or scoring. Source commit: 4a97533b1b3c56643143353c685d11964bdc30d6. Original score-level analysis uses Python 3.10.11, numpy 2.2.6 and scipy 1.15.3; lm-eval 0.4.13 and datasets 5.1.0 are pinned. Original langdetect version is unknown; public environment pins 1.0.9. Figure-generation versions and input/output SHA-256 hashes are in [the figure manifest](figures/manifest.json). Full dataset revisions are in [REVISIONS.json](items/REVISIONS.json). The historical protocol remains available, but final README, deviations and actual payloads supersede outdated claims.
+This report consumes frozen aggregate and label/count inputs; it does no new bootstrap, judging or scoring. Source commit: 4a97533b1b3c56643143353c685d11964bdc30d6. Original score-level analysis uses Python 3.10.11, numpy 2.2.6 and scipy 1.15.3; lm-eval 0.4.13 and datasets 5.1.0 are pinned. Original langdetect version is unknown; public environment pins 1.0.9. Figure-generation versions and input/output SHA-256 hashes are in [the figure manifest](figures/manifest.json). Full dataset revisions are in [REVISIONS.json](items/REVISIONS.json). The historical protocol remains available, but the [technical report](docs/TECHNICAL_REPORT.md), deviations and actual payloads supersede outdated claims.
 
 #### D.4  What can be independently inspected
 
@@ -411,7 +418,7 @@ Source: [detailed technical record](docs/TECHNICAL_REPORT.md); [historical proto
 
 ## Reproduction and source data
 
-The report, figures and complete technical record are readable directly in this repository. The PDF edition is distributed separately; no PDF, paper-page images or paper-generation package is included here.
+The report, figures and complete technical record are readable directly in this repository. The PDF edition is maintained outside this repository; no PDF, paper-page images or paper-generation package is included here.
 
 Recompute the aggregate tables from the published scores and derived inputs:
 

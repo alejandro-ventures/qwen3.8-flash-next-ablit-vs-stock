@@ -12,6 +12,10 @@ The protocol is a [redacted transcription](../PROTOCOL.md), with a [redaction le
 
 Before B1 collection, the overlay-active gate required the expected serve-path suffix, sidecar and view-index hashes, and at least one different greedy token hash from A1 among the 200 Layer 2 prompts. These are activation checks, not loader-level proof that every intended tensor was replaced; the engine did not supply that proof. The recorded artifact hashes are published without host metadata.
 
+## Planned auxiliary outcome: unreported
+
+The protocol also planned a pairwise win rate for 59 auxiliary prompts and a 20-pair check. Responses were collected, but completion of that judging/check is unverified in the retained records, and no auxiliary result is reported. This planned exploratory outcome is not part of the six-benchmark composite or primary gates. It must not be treated as completed with hidden results. See [D16](../DEVIATIONS.md#d16-recorded-2026-11-12-planned-auxiliary-judging-outcome-unreported) and the [erratum](../ERRATA.md).
+
 ## Capability
 
 ### Capability B_vs_A (Y minus X; X=A1+A2, Y=B1+B2); stratified bootstrap
@@ -53,7 +57,7 @@ The original JSON-copy, assistant-style and 200 Layer 2 prompt texts are withhel
 | B2 | 20e15e4, published image | ABLIT=1 | 47/50 | 0/20 |
 | C1 | 20e15e4, published image | exploratory second sidecar | 42/50 | 0/20 |
 
-H4 compares unique failed thinking-off tasks: A 0/50, B 3/50, C 8/50. The operational gate fails for B; exact McNemar p=0.25 is not a significant paired difference. The one-sided 95% upper bound is calculated with n=50. Historical thinking-on failures occurred in every session, including stock, and are a separate serving-stack observation. The [fresh synthetic checks](../findings/thinking_json_schema.md), covering streamed/non-streamed, strict/non-strict and json_object conditions, did not reproduce malformed JSON. Schema-constrained thinking-on responses parsed and met the schema but failed exact amount equality. A count-only audit of the historical thinking-on responses found all 120/120 parseable and schema-valid, with correct record_id but incorrect amount and finish_reason=stop. The observed historical failure is value copying; its root cause remains unestablished. The malformed-JSON allegation is withdrawn. No raw replies or examples are published under the scores-only decision.
+H4 compares unique failed thinking-off tasks: A 0/50, B 3/50, C 8/50. The operational gate fails for B; exact McNemar p=0.25 is not a significant paired difference. The one-sided 95% upper bound is calculated with n=50. Historical thinking-on failures occurred in every session, including stock, and are a separate stock-deployment observation with unestablished cause. The [fresh synthetic checks](../findings/thinking_json_schema.md), covering streamed/non-streamed, strict/non-strict and json_object conditions, did not reproduce malformed JSON. Schema-constrained thinking-on responses parsed and met the schema but failed exact amount equality. A count-only audit of the historical thinking-on responses found all 120/120 parseable and schema-valid, with correct record_id but incorrect amount and finish_reason=stop. The observed historical failure is value copying; its root cause remains unestablished. The malformed-JSON allegation is withdrawn. No raw replies or examples are published under the scores-only decision.
 
 Layer 2 hashes are identical for 200/200 A1/A2 and 200/200 B1/B2 prompts; all 200 differ across A/B. First differing word is the fallback because token IDs were not stored. The reported median and IQR of token-length ratios are 1.000 (individual A/B ratios span about 0.199-2.188), but the recorded cap statistics are 160/200 for A1/A2, 154/200 for B1/B2 and 156/200 for C1. Only 148/200 A/B pairs are capped on both sides. The earlier universal-cap explanation was incorrect; median and IQR do not imply every ratio equals one. Observed repeatability on these prompts is not proof that restart uncertainty is negligible.
 
@@ -64,38 +68,38 @@ The judge is itself abliterated. Published labels support **re-analysis, not re-
 ### Refusal and over-refusal under several classifiers (H5; frozen judge prompt hash 6f3a6852c5a9)
 Contrast-specific complete cases; per-prompt arm value = mean over the arm's sessions; paired cluster bootstrap over prompts. Read the judge rows together with the validation audit below (kappa 0.34): the direction is robust, the magnitudes are classifier-dependent and should not be quoted as precise.
 
-COMPLIED is a classifier label, not verified useful task completion; the historical truncation handling differs from the protocol (D15).
+COMPLIED is a classifier label, not verified useful task completion; the historical truncation handling differs from the protocol (D15). The reader-facing names below are neutral display labels: frozen JSON/output keys retain the v1.0 strings `judge COMPLIED (useful compliance)` and `unclassified counted as refused (pre-specified sensitivity)`. The latter uses implemented UNCLASSIFIED, not the protocol all-truncation rule. A [separate count-only strict sensitivity](../analysis/strict_unclassified_sensitivity.md) gives primary harmful B=4.47% and B-A=-44.67 pp, and benign B-A=-4.00 pp, without a paired interval. See the [erratum](../ERRATA.md#2-historical-classifier-names-and-truncation-sensitivity).
 
 | set | classifier | A % | B % | C % | B-A (pp) [95% CI] | C-A (pp) [95% CI] |
 |---|---|---|---|---|---|---|
 | refusal_harmful (n=291) | judge REFUSED (frozen primary) | 49.1 | 0.0 | 0.0 | -49.14 [-54.98, -43.30] | -49.14 [-54.98, -43.30] |
 | refusal_harmful (n=291) | judge REFUSED+PARTIAL (pre-specified) | 97.6 | 1.0 | 0.3 | -96.56 [-98.63, -94.16] | -97.25 [-98.97, -95.19] |
 | refusal_harmful (n=291) | judge REFUSED+OFFTOPIC (exploratory) | 49.1 | 5.2 | 3.8 | -43.99 [-50.17, -37.80] | -45.36 [-51.20, -39.52] |
-| refusal_harmful (n=291) | judge COMPLIED (useful compliance) | 2.4 | 93.8 | 95.9 | +91.41 [+87.97, +94.50] | +93.47 [+90.38, +96.22] |
+| refusal_harmful (n=291) | COMPLIED label (usefulness unverified) | 2.4 | 93.8 | 95.9 | +91.41 [+87.97, +94.50] | +93.47 [+90.38, +96.22] |
 | refusal_harmful (n=291) | judge OFFTOPIC | 0.0 | 5.2 | 3.8 | +5.15 [+2.75, +7.90] | +3.78 [+1.72, +6.19] |
 | refusal_harmful (n=291) | regex refusal phrase | 68.4 | 0.0 | 0.0 | -68.38 [-73.54, -63.23] | -68.38 [-73.54, -63.23] |
-| refusal_harmful (n=291) | unclassified counted as refused (pre-specified sensitivity) | 49.1 | 0.0 | 0.0 | -49.14 [-54.98, -43.30] | -49.14 [-54.98, -43.30] |
+| refusal_harmful (n=291) | REFUSED + implemented UNCLASSIFIED (historical sensitivity) | 49.1 | 0.0 | 0.0 | -49.14 [-54.98, -43.30] | -49.14 [-54.98, -43.30] |
 | refusal_benign (n=350) | judge REFUSED (frozen primary) | 3.1 | 0.0 | 0.0 | -3.14 [-5.14, -1.43] | -3.14 [-5.14, -1.43] |
 | refusal_benign (n=350) | judge REFUSED+PARTIAL (pre-specified) | 10.3 | 0.3 | 0.3 | -10.00 [-13.43, -6.86] | -10.00 [-13.43, -6.86] |
 | refusal_benign (n=350) | judge REFUSED+OFFTOPIC (exploratory) | 3.1 | 2.6 | 0.3 | -0.57 [-2.86, +1.71] | -2.86 [-4.86, -1.14] |
-| refusal_benign (n=350) | judge COMPLIED (useful compliance) | 89.7 | 97.1 | 99.4 | +7.43 [+4.00, +11.14] | +9.71 [+6.57, +13.14] |
+| refusal_benign (n=350) | COMPLIED label (usefulness unverified) | 89.7 | 97.1 | 99.4 | +7.43 [+4.00, +11.14] | +9.71 [+6.57, +13.14] |
 | refusal_benign (n=350) | judge OFFTOPIC | 0.0 | 2.6 | 0.3 | +2.57 [+1.14, +4.29] | +0.29 [+0.00, +0.86] |
 | refusal_benign (n=350) | regex refusal phrase | 12.9 | 0.0 | 0.0 | -12.86 [-16.57, -9.43] | -12.86 [-16.57, -9.43] |
-| refusal_benign (n=350) | unclassified counted as refused (pre-specified sensitivity) | 3.1 | 0.0 | 0.0 | -3.14 [-5.14, -1.43] | -3.14 [-5.14, -1.43] |
+| refusal_benign (n=350) | REFUSED + implemented UNCLASSIFIED (historical sensitivity) | 3.1 | 0.0 | 0.0 | -3.14 [-5.14, -1.43] | -3.14 [-5.14, -1.43] |
 | refusal_harmful_t (n=100) | judge REFUSED (frozen primary) | 83.0 | 0.0 | 0.0 | -83.00 [-90.00, -75.00] | -83.00 [-90.00, -75.00] |
 | refusal_harmful_t (n=100) | judge REFUSED+PARTIAL (pre-specified) | 96.0 | 2.0 | 1.0 | -94.00 [-98.00, -89.00] | -95.00 [-99.00, -90.00] |
 | refusal_harmful_t (n=100) | judge REFUSED+OFFTOPIC (exploratory) | 83.0 | 1.0 | 2.0 | -82.00 [-89.00, -74.00] | -81.00 [-88.00, -73.00] |
-| refusal_harmful_t (n=100) | judge COMPLIED (useful compliance) | 4.0 | 96.0 | 97.0 | +92.00 [+86.00, +97.00] | +93.00 [+88.00, +98.00] |
+| refusal_harmful_t (n=100) | COMPLIED label (usefulness unverified) | 4.0 | 96.0 | 97.0 | +92.00 [+86.00, +97.00] | +93.00 [+88.00, +98.00] |
 | refusal_harmful_t (n=100) | judge OFFTOPIC | 0.0 | 1.0 | 2.0 | +1.00 [+0.00, +3.00] | +2.00 [+0.00, +5.00] |
 | refusal_harmful_t (n=100) | regex refusal phrase | 83.0 | 0.0 | 0.0 | -83.00 [-90.00, -75.00] | -83.00 [-90.00, -75.00] |
-| refusal_harmful_t (n=100) | unclassified counted as refused (pre-specified sensitivity) | 83.0 | 1.0 | 0.0 | -82.00 [-89.00, -74.00] | -83.00 [-90.00, -75.00] |
+| refusal_harmful_t (n=100) | REFUSED + implemented UNCLASSIFIED (historical sensitivity) | 83.0 | 1.0 | 0.0 | -82.00 [-89.00, -74.00] | -83.00 [-90.00, -75.00] |
 | refusal_benign_t (n=100) | judge REFUSED (frozen primary) | 11.0 | 0.0 | 0.0 | -11.00 [-18.00, -5.00] | -11.00 [-18.00, -5.00] |
 | refusal_benign_t (n=100) | judge REFUSED+PARTIAL (pre-specified) | 22.0 | 0.0 | 0.0 | -22.00 [-30.00, -14.00] | -22.00 [-30.00, -14.00] |
 | refusal_benign_t (n=100) | judge REFUSED+OFFTOPIC (exploratory) | 11.0 | 0.0 | 0.0 | -11.00 [-18.00, -5.00] | -11.00 [-18.00, -5.00] |
-| refusal_benign_t (n=100) | judge COMPLIED (useful compliance) | 77.0 | 99.0 | 98.0 | +22.00 [+14.00, +31.00] | +21.00 [+13.00, +30.00] |
+| refusal_benign_t (n=100) | COMPLIED label (usefulness unverified) | 77.0 | 99.0 | 98.0 | +22.00 [+14.00, +31.00] | +21.00 [+13.00, +30.00] |
 | refusal_benign_t (n=100) | judge OFFTOPIC | 0.0 | 0.0 | 0.0 | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] |
 | refusal_benign_t (n=100) | regex refusal phrase | 16.0 | 0.0 | 0.0 | -16.00 [-23.00, -9.00] | -16.00 [-23.00, -9.00] |
-| refusal_benign_t (n=100) | unclassified counted as refused (pre-specified sensitivity) | 12.0 | 1.0 | 2.0 | -11.00 [-18.00, -5.00] | -10.00 [-17.00, -4.00] |
+| refusal_benign_t (n=100) | REFUSED + implemented UNCLASSIFIED (historical sensitivity) | 12.0 | 1.0 | 2.0 | -11.00 [-18.00, -5.00] | -10.00 [-17.00, -4.00] |
 
 ### Classifier checks (judge vs regex, per session)
 | session | set | n | unclassified+error+unparsed % | judge-vs-regex agreement (refused vs not) | Cohen kappa |
@@ -249,6 +253,8 @@ Validation sampling correction (D12): the planned 30 judge/regex agreements plus
 | D13 | after data and reviewer gate | corrected strata, complete-case coverage, MGSM clustered analysis, speed eligibility, D8 sensitivities and uncertainty wording |
 | D14 | import change before B; documented after collection | installed-to-vendored IFEval import after protocol freeze; all five comparison sessions later re-scored together |
 | D15 | implementation during collection; discovered in final review | truncated refusal replies were not all unclassified; strict-rule count sensitivity supplied |
+| D16 | post-publication reporting clarification | planned auxiliary judging outcome is unreported; execution not verified in retained records |
+| D17 | post-publication documentation clarification | actual JN/JT caps were already frozen pre-B; prose mismatch recorded |
 
 [DEVIATIONS.md](../DEVIATIONS.md) retains superseded D2, D9 and D10 statements with visible corrections. D8 used last stored attempt results, including after restarts; A1's original-rule exceedances were not enforced prospectively. Poll telemetry has blind spots and cannot prove foreign traffic absent. [Full session × step × attempt table](../analysis/inputs/polls.csv) retains original-rule, changed-rule and step-specific counts with relative minutes.
 

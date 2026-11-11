@@ -1,4 +1,5 @@
 # Copyright 2023 The Google Research Authors.
+# Modified for this study: redirected the instruction import to the local vendored module.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

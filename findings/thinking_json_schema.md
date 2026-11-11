@@ -27,7 +27,7 @@ One GB10 machine (DGX Spark class, 128 GB unified memory). Owner-specified teste
 
 28 sequential completion requests, no retries, plus one model query. Three synthetic records per schema condition, one per json_object condition. Greedy (`temperature: 0`), template `reasoning_effort: low`, `enable_thinking` explicit; `max_tokens: 3000` with thinking on, `120` off. Streamed requests set `stream_options.include_usage: true`; deltas were concatenated separately for content and reasoning_content. Synthetic inputs match the historical standalone repro, not the withheld study set. These fresh counts are separate from the original descriptive 50/20 counts.
 
-The malformed-content bug did not reproduce in the six fresh thinking-on strict-schema requests. Exact-value failures in this condition: 6/6. A value-copy failure is not a JSON syntax or schema failure.
+No malformed content was observed in the six fresh thinking-on strict-schema requests. Exact-value failures in this condition: 6/6. A value-copy failure is not a JSON syntax or schema failure.
 
 | format | thinking | streamed | parses / n | equals expected / n | schema-valid / n | length finishes | non-JSON content | reasoning present |
 |---|---|---|---|---|---|---|---|---|
@@ -59,4 +59,4 @@ The existing `repro_thinking_json_schema.py` uses three invented record IDs per 
 
 ## Practical consequence
 
-For exact copying under json_schema, thinking off passed the tested synthetic records. The fresh results do not support posting a confirmed malformed-JSON engine bug. The historical syntax allegation was incorrect and is withdrawn. B and C thinking-off failures remain separate historical observations.
+For exact copying under json_schema, thinking off passed the tested synthetic records. These checks do not establish a JSON-syntax or schema-enforcement failure. The historical syntax allegation was incorrect and is withdrawn. B and C thinking-off failures remain separate historical observations.

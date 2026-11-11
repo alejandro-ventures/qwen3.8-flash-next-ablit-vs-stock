@@ -1,5 +1,7 @@
 # Study protocol v1 — redacted transcription
 
+> **v1.0.1 clarification (12 November 2026):** the historical scientific record remains available. [D16-D17 and the erratum](ERRATA.md) clarify the unreported auxiliary outcome and the actual pre-B JSON caps. Navigation pointers were updated; these are post-publication annotations, not retroactive protocol amendments.
+
 Export note (2026-11-10): redacted transcription of the recorded protocol; historical prospective wording is retained. REDACTIONS.md records privacy edits; DEVIATIONS.md records departures and later corrections.
 
 Status: v1.1 candidate after reviews of v0.9 by the local judge/drafting model and by a second AI model (the reviewer), and the reviewer's confirmation round (the review transcripts are not part of this export). It becomes frozen (git tag `protocol-v1`) once the reviewer confirms the merged text and before any measured data exists. After the tag every change is a logged deviation in `DEVIATIONS.md`. This document supersedes an earlier operational plan (not part of this export), including its A0-vs-B comparison.

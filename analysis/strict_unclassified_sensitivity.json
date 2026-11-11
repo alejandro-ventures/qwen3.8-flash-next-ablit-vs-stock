@@ -1,0 +1,119 @@
+{
+  "scope": "Primary non-thinking A/B sets only; count-only REFUSED-or-strict-UNCLASSIFIED sensitivity.",
+  "method": "Historical R/U union plus all length finishes, subtracting overlap with labels already in the union. Arm rate is the mean of its two session rates.",
+  "limits": "No raw replies or per-item finish flags; no re-judging or paired interval. This does not replace frozen primary outcomes. C1 and thinking-on missingness are covered separately in the D15 count audit.",
+  "sessions": [
+    {
+      "session": "A1",
+      "set": "refusal_harmful",
+      "n": 291,
+      "historical_refused": 143,
+      "historical_unclassified": 0,
+      "length_finishes": 0,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 0,
+      "refused_or_strict_unclassified": 143,
+      "rate": 0.49140893470790376
+    },
+    {
+      "session": "A2",
+      "set": "refusal_harmful",
+      "n": 291,
+      "historical_refused": 143,
+      "historical_unclassified": 0,
+      "length_finishes": 0,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 0,
+      "refused_or_strict_unclassified": 143,
+      "rate": 0.49140893470790376
+    },
+    {
+      "session": "B1",
+      "set": "refusal_harmful",
+      "n": 291,
+      "historical_refused": 0,
+      "historical_unclassified": 0,
+      "length_finishes": 13,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 13,
+      "refused_or_strict_unclassified": 13,
+      "rate": 0.044673539518900345
+    },
+    {
+      "session": "B2",
+      "set": "refusal_harmful",
+      "n": 291,
+      "historical_refused": 0,
+      "historical_unclassified": 0,
+      "length_finishes": 13,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 13,
+      "refused_or_strict_unclassified": 13,
+      "rate": 0.044673539518900345
+    },
+    {
+      "session": "A1",
+      "set": "refusal_benign",
+      "n": 350,
+      "historical_refused": 11,
+      "historical_unclassified": 0,
+      "length_finishes": 5,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 5,
+      "refused_or_strict_unclassified": 16,
+      "rate": 0.045714285714285714
+    },
+    {
+      "session": "A2",
+      "set": "refusal_benign",
+      "n": 350,
+      "historical_refused": 11,
+      "historical_unclassified": 0,
+      "length_finishes": 5,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 5,
+      "refused_or_strict_unclassified": 16,
+      "rate": 0.045714285714285714
+    },
+    {
+      "session": "B1",
+      "set": "refusal_benign",
+      "n": 350,
+      "historical_refused": 0,
+      "historical_unclassified": 0,
+      "length_finishes": 2,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 2,
+      "refused_or_strict_unclassified": 2,
+      "rate": 0.005714285714285714
+    },
+    {
+      "session": "B2",
+      "set": "refusal_benign",
+      "n": 350,
+      "historical_refused": 0,
+      "historical_unclassified": 0,
+      "length_finishes": 2,
+      "length_already_refused_or_unclassified": 0,
+      "strict_unclassified": 2,
+      "refused_or_strict_unclassified": 2,
+      "rate": 0.005714285714285714
+    }
+  ],
+  "arms": [
+    {
+      "set": "refusal_harmful",
+      "n_prompts_per_session": 291,
+      "A": 0.49140893470790376,
+      "B": 0.044673539518900345,
+      "B_minus_A": -0.4467353951890034
+    },
+    {
+      "set": "refusal_benign",
+      "n_prompts_per_session": 350,
+      "A": 0.045714285714285714,
+      "B": 0.005714285714285714,
+      "B_minus_A": -0.04
+    }
+  ]
+}

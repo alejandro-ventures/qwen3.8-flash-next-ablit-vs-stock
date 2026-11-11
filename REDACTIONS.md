@@ -139,7 +139,7 @@ Generic wording used: "a second AI model (the reviewer)" for the reviewing model
 | harness/make_items2.py | private generator removed | 1 |
 | harness/make_items2.py | private jsoncopy() generator removed (it embedded a private id prefix) | 1 |
 | harness/make_items2.py | default builders: jsoncopy dropped | 1 |
-| harness/run_session.py | Mia's tools path configurable (the tools are not shipped here; see README) | 2 |
+| harness/run_session.py | Mia's tools path configurable (the tools are not shipped here; see docs/TECHNICAL_REPORT.md) | 2 |
 
 ## Not exported (by design)
 
@@ -149,7 +149,7 @@ Model replies of any kind; harmful-prompt text and completions; the judge-sample
 
 The original schema-JSON reply excerpt in D1 is withheld entirely under the scores-only publication scope; counts and the surrounding observation are unchanged. In D13 item 10, the clause stating the owner's operational recommendation for their own machine is omitted under the publication scope (marked in place); the statement that the reviewer confirmation round was not run is retained. Correction notes were added to D1 (historical mechanism unresolved, link to the findings note) and D11 (scoring-module provenance exception), and the D10 note was extended with the same cross-reference; original wording and numbers are unchanged. New authored files provide public input schemas, a label-only validation summary, the analysis entry point, illustrative synthetic sets, item builders, request profiles, licence attribution and generic metadata/scoring examples. Public artifact hashes were selected from a private provenance record; host and environment fields are withheld.
 
-Legacy alternate-environment aggregate files retain their original numbers under names ending `_altenv_legacy`; the distinct `_altenv` outputs are corrected-v2 reanalysis from published sensitivity scores. This distinction is documented in the README. No historical score is changed.
+Legacy alternate-environment aggregate files retain their original numbers under names ending `_altenv_legacy`; the distinct `_altenv` outputs are corrected-v2 reanalysis from published sensitivity scores. This distinction is documented in docs/TECHNICAL_REPORT.md. No historical score is changed.
 
 Scientific corrections on 2026-11-10: D1 failure classification, D14 import-path provenance, Layer 2 cap-saturation wording, and speed-step sensitivity wording were corrected visibly. No source score or numeric analysis operation changed.
 

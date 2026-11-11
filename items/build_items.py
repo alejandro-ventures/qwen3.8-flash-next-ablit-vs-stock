@@ -67,7 +67,7 @@ def check(no_lc):
         ids = [r["id"] for r in csv.DictReader(open(ITEMS / name, encoding="utf-8"))]
         built = [json.loads(l)["id"] for l in open(ITEMS / src, encoding="utf-8") if l.strip()] if (ITEMS / src).exists() else None
         ok = built == ids; bad += (not ok); print(("OK       " if ok else "MISMATCH ") + f"{src} ids vs {name} ({len(ids)} ids)")
-    print("harness/tasks.py:", "see README (its freeze-time hash in MANIFEST.json differs from the shipped file; not enforced here)")
+    print("harness/tasks.py:", "see docs/TECHNICAL_REPORT.md (its freeze-time hash in MANIFEST.json differs from the shipped file; not enforced here)")
     return bad
 
 if __name__ == "__main__":

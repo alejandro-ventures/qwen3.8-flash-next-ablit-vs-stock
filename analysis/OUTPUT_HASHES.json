@@ -8,5 +8,7 @@
   "extra_results_unseeded.json": "7caa2a382021c3854e3520937c0cb6e233efd46f3970dd663ca174213c17ce62",
   "extra_tables_unseeded.md": "dc82dce7c4e8d5c279045acb9c698bb558752e065e03c03cb72c9da87433a2a9",
   "extra_refusal_classifiers.md": "94a22c1de76f64b3e9a5d803cf0166cbce8e457346338790c946f29e6a423b47",
-  "validation_summary.json": "fd97be774163d816eb7bda1f636d73b947bcf7ffe488371158a68e93c7f9f1cd"
+  "validation_summary.json": "fd97be774163d816eb7bda1f636d73b947bcf7ffe488371158a68e93c7f9f1cd",
+  "strict_unclassified_sensitivity.json": "6bc120a36f51d9411895fae4817a21130b3f4c7978542a9a36378a7febc6a9db",
+  "strict_unclassified_sensitivity.md": "c4f21fc82adde497b1fec5875426b4e6c3ceb32f4392e480cd0bc5ef57f4c498"
 }

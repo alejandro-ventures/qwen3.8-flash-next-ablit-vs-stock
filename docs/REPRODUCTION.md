@@ -20,3 +20,7 @@ This is an aggregate-arithmetic reproduction from exported scores and derived in
 | `extra_tables_unseeded.md` | `dc82dce7c4e8d5c279045acb9c698bb558752e065e03c03cb72c9da87433a2a9` |
 | `extra_refusal_classifiers.md` | `94a22c1de76f64b3e9a5d803cf0166cbce8e457346338790c946f29e6a423b47` |
 | `validation_summary.json` | `fd97be774163d816eb7bda1f636d73b947bcf7ffe488371158a68e93c7f9f1cd` |
+
+## v1.0.1 count-only addition
+
+The pipeline additionally generates strict_unclassified_sensitivity.json and .md from the already published labels and aggregate finish/label intersections. No raw text or new judging is used; no paired interval is estimated. The original ten outputs remain the reference artifacts above. The versioned erratum documents label interpretation and the two post-publication reporting clarifications.

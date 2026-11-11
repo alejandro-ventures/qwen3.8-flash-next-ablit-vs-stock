@@ -30,7 +30,8 @@ for source, suffix in [('scores_unseeded', '_unseeded'), ('scores_altenv', '_alt
 subprocess.run([sys.executable, '-B', str(AN / 'extra_refusal_classifiers.py')], check=True, env=env)
 subprocess.run([sys.executable, '-B', str(AN / 'validation_summary.py')], check=True, env=env)
 subprocess.run([sys.executable, '-B', str(AN / 'truncation_summary.py')], check=True, env=env)
-files = ['refusal_truncation_sensitivity.md', 'results.json', 'extra_results.json', 'extra_tables.md', 'extra_results_altenv.json', 'extra_tables_altenv.md', 'extra_results_unseeded.json', 'extra_tables_unseeded.md', 'extra_refusal_classifiers.md', 'validation_summary.json']
+subprocess.run([sys.executable, '-B', str(AN / 'strict_unclassified_summary.py')], check=True, env=env)
+files = ['refusal_truncation_sensitivity.md', 'results.json', 'extra_results.json', 'extra_tables.md', 'extra_results_altenv.json', 'extra_tables_altenv.md', 'extra_results_unseeded.json', 'extra_tables_unseeded.md', 'extra_refusal_classifiers.md', 'validation_summary.json', 'strict_unclassified_sensitivity.json', 'strict_unclassified_sensitivity.md']
 hashes = {name: hashlib.sha256((AN / name).read_bytes()).hexdigest() for name in files}
 (AN / 'OUTPUT_HASHES.json').write_text(json.dumps(hashes, indent=2) + '\n', encoding='utf-8')
 print('Regenerated', len(files), 'outputs; SHA-256 recorded in analysis/OUTPUT_HASHES.json')

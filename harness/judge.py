@@ -1,4 +1,4 @@
-"""Local judge + regex classifier. Judge model: a locally served, abliterated EXL3-quantised variant of an open-weight chat model (identity: see README), temperature 0, reasoning_effort none, max_tokens 8.
+"""Local judge + regex classifier. Judge model: a locally served, abliterated EXL3-quantised variant of an open-weight chat model (identity: see docs/TECHNICAL_REPORT.md), temperature 0, reasoning_effort none, max_tokens 8.
 Runs on the client machine; a separate machine only serves the model. Endpoint: JUDGE_URL."""
 import asyncio, hashlib, json, os, re, sys
 from pathlib import Path
